@@ -1,0 +1,489 @@
+/* ==========================================================================
+   VARIÁVEIS DE CONFIGURAÇÃO (Fácil Customização)
+   ========================================================================== */
+:root {
+    /* Paleta de Cores Obrigatória */
+    --color-green-primary: #2e6f40;
+    --color-green-dark: #1e4b2b;
+    --color-green-light: #eef7f1;
+    --color-brown-primary: #6d4c41;
+    --color-brown-dark: #4e342e;
+    --color-blue-accent: #1976d2;
+    --color-orange-accent: #f57c00;
+    
+    /* Cores de Fundo e Texto Universais */
+    --bg-main: #fafafa;
+    --bg-card: #ffffff;
+    --text-main: #212121;
+    --text-muted: #555555;
+    --border-color: #e0e0e0;
+
+    /* Fontes Empregando clamp() para responsividade perfeita */
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-size-base: clamp(0.95rem, 0.4vw + 0.8rem, 1.15rem);
+    --font-size-h1: clamp(2rem, 3.5vw + 1rem, 3.8rem);
+    --font-size-h2: clamp(1.4rem, 2vw + 0.8rem, 2.2rem);
+    --font-size-h3: clamp(1.15rem, 1vw + 0.8rem, 1.5rem);
+
+    /* Espaçamentos Flexíveis */
+    --spacing-sm: clamp(0.5rem, 1vw, 0.8rem);
+    --spacing-md: clamp(1rem, 2vw, 1.5rem);
+    --spacing-lg: clamp(1.8rem, 4vw, 3rem);
+    
+    /* Configurações Visuais Gerais */
+    --border-radius: 12px;
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.06);
+    --shadow-deep: 0 10px 30px rgba(0, 0, 0, 0.12);
+    --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Modo Escuro */
+[data-theme="dark"] {
+    --bg-main: #121212;
+    --bg-card: #1e1e1e;
+    --text-main: #f5f5f5;
+    --text-muted: #b0b0b0;
+    --border-color: #333333;
+    --color-green-light: #1b2d22;
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================================================
+   RESET E ESTILOS GERAIS
+   ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    transition: var(--transition-smooth);
+}
+
+.container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ==========================================================================
+   BARRA DE ACESSIBILIDADE FLUTUANTE
+   ========================================================================== */
+.accessibility-bar {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    background-color: var(--bg-card);
+    border: 2px solid var(--color-green-primary);
+    box-shadow: var(--shadow-deep);
+    border-radius: var(--border-radius);
+    padding: 8px;
+    display: flex;
+    gap: 8px;
+}
+
+.accessibility-bar button {
+    background-color: var(--color-green-light);
+    color: var(--color-green-dark);
+    border: none;
+    padding: 8px 12px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    font-size: 0.9rem;
+}
+
+.accessibility-bar button:hover,
+.accessibility-bar button:focus {
+    background-color: var(--color-green-primary);
+    color: white;
+    outline: 2px solid var(--color-orange-accent);
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+.hero {
+    position: relative;
+    background: linear-gradient(rgba(46, 111, 64, 0.4), rgba(109, 76, 65, 0.5)), url('Foto1.png') center/cover no-repeat;
+    background-color: var(--color-green-dark); /* Fallback visual */
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: var(--spacing-lg) 0;
+    margin-bottom: var(--spacing-lg);
+}
+
+.hero-text {
+    max-width: 800px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: var(--font-size-h1);
+    line-height: 1.15;
+    font-weight: 800;
+    margin-bottom: var(--spacing-md);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+}
+
+.hero .subtitle {
+    font-size: clamp(1.1rem, 1vw + 0.8rem, 1.5rem);
+    margin-bottom: var(--spacing-lg);
+    color: #f1f8f3;
+    text-shadow: 0 1px 5px rgba(0,0,0,0.4);
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: var(--color-orange-accent);
+    color: white;
+    text-decoration: none;
+    padding: 12px 28px;
+    font-weight: bold;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #e65100;
+    transform: translateY(-2px);
+    outline: 3px solid var(--color-blue-accent);
+}
+
+/* ==========================================================================
+   GRID PRINCIPAL RESPONSIVO (MAIN LAYOUT)
+   ========================================================================== */
+.main-layout {
+    display: grid;
+    grid-template-columns: minmax(320px, 1fr) 400px;
+    gap: var(--spacing-lg);
+    align-items: start;
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Content Area */
+.content-area {
+    background-color: transparent;
+}
+
+.intro-section {
+    background-color: var(--bg-card);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-soft);
+    margin-bottom: var(--spacing-md);
+    border-left: 5px solid var(--color-green-primary);
+}
+
+.highlight-text {
+    font-size: clamp(1.05rem, 0.5vw + 0.9rem, 1.3rem);
+    font-weight: 600;
+    color: var(--color-green-dark);
+    margin-bottom: var(--spacing-md);
+}
+
+/* Accordion Component */
+.accordion-section {
+    margin-bottom: 12px;
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.accordion-trigger {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: var(--spacing-md) var(--spacing-lg);
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    color: var(--text-main);
+    transition: var(--transition-smooth);
+}
+
+.accordion-trigger:hover, .accordion-trigger:focus {
+    background-color: var(--color-green-light);
+    outline: none;
+}
+
+.accordion-trigger h2 {
+    font-size: var(--font-size-h3);
+    color: var(--color-brown-primary);
+}
+
+.accordion-icon {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-green-primary);
+    transition: transform 0.3s ease;
+}
+
+.accordion-panel {
+    padding: 0 var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
+}
+
+.accordion-panel p {
+    margin-bottom: var(--spacing-md);
+    color: var(--text-muted);
+}
+
+/* Imagens conforme estrutura obrigatória */
+.imagem {
+    margin: var(--spacing-md) 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border-color);
+    transition: var(--transition-smooth);
+}
+
+.imagem:hover {
+    transform: scale(1.01);
+    box-shadow: var(--shadow-deep);
+}
+
+.imagem img {
+    width: 100%;
+    object-fit: cover;
+    max-height: 450px;
+}
+
+/* Listas customizadas */
+.styled-list, .styled-ol {
+    margin: var(--spacing-md) 0 var(--spacing-md) 24px;
+}
+
+.styled-list li, .styled-ol li {
+    margin-bottom: 8px;
+    color: var(--text-main);
+}
+
+.styled-list li::marker {
+    color: var(--color-orange-accent);
+}
+
+.styled-ol li::marker {
+    color: var(--color-blue-accent);
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   FORMULÁRIO LATERAL (SIDEBAR)
+   ========================================================================== */
+.sidebar-area {
+    position: relative;
+}
+
+.sticky-card-form {
+    position: sticky;
+    top: 100px;
+    background-color: var(--bg-card);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-deep);
+    border-top: 6px solid var(--color-orange-accent);
+}
+
+.sticky-card-form h3 {
+    font-size: var(--font-size-h3);
+    color: var(--color-brown-dark);
+    margin-bottom: var(--spacing-sm);
+}
+
+.sticky-card-form p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-md);
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: var(--text-main);
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-size: 1rem;
+    transition: var(--transition-smooth);
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-blue-accent);
+    box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+}
+
+.btn-register {
+    width: 100%;
+    background-color: var(--color-green-primary);
+    color: white;
+    border: none;
+    padding: 14px;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-soft);
+}
+
+.btn-register:hover, .btn-register:focus {
+    background-color: var(--color-green-dark);
+    outline: 2px solid var(--color-orange-accent);
+}
+
+.feedback-message {
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.feedback-message.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+/* ==========================================================================
+   SEÇÃO DE COMENTÁRIOS
+   ========================================================================== */
+.comments-section {
+    background-color: var(--bg-card);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-soft);
+    margin-top: var(--spacing-lg);
+}
+
+.comments-section h3 {
+    color: var(--color-green-dark);
+    margin-bottom: 8px;
+}
+
+.btn-submit {
+    background-color: var(--color-brown-primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.btn-submit:hover, .btn-submit:focus {
+    background-color: var(--color-brown-dark);
+}
+
+.comments-list {
+    margin-top: var(--spacing-md);
+}
+
+.comment-item {
+    padding: 12px;
+    background-color: var(--bg-main);
+    border-left: 4px solid var(--color-blue-accent);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   RODAPÉ
+   ========================================================================== */
+.main-footer {
+    background-color: var(--color-brown-dark);
+    color: #f5f5f5;
+    padding: var(--spacing-lg) 0;
+    margin-top: var(--spacing-lg);
+    border-top: 4px solid var(--color-green-primary);
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+}
+
+.footer-tagline {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.footer-references a {
+    color: #ffb74d;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-references a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   MEDIA QUERIES (Responsividade Ultrawide, Notebook, Tablet e Mobile)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .main-layout {
+        grid-template-columns: 1fr; /* Muda para coluna única em tablets/mobile */
+    }
+    
+    .sticky-card-form {
+        position: static; /* Remove sticky lateral */
+    }
+}
+
+@media (max-width: 600px) {
+    .accessibility-bar {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        justify-content: space-around;
+        width: calc(100% - 20px);
+    }
+    
+    .hero {
+        padding-top: 80px; /* Evita sobreposição com a barra de acessibilidade fixa */
+    }
+}
